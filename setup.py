@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.0'
+version = '0.1'
 
 requires = [
     "setuptools>=0.7",
@@ -33,10 +33,15 @@ setup(name='rebecca.menu',
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.3",
+        "License :: OSI Approved :: MIT License",
+        "Framework :: Pyramid",
         ],
       keywords='',
-      author='',
-      author_email='',
+      author='Atsushi Odagiri',
+      author_email='aodagx@gmail.com',
       url='https://github.com/rebeccaframework/rebecca.menu',
       license='MIT',
       packages=find_packages('src'),

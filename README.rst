@@ -4,7 +4,7 @@
    :target: https://travis-ci.org/rebeccaframework/rebecca.menu
 
 Introduction
-============
+======================
 
 ``rebecca.menu`` is component for `pyramid <http://pypi.python.org/pypi/pyramid>`_, that provides management of menu urls.
 
