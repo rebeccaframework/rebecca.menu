@@ -3,6 +3,10 @@ import os
 
 version = '0.0'
 
+requires = [
+    "setuptools>=0.7",
+]
+
 long_description = (
     open('README.rst').read()
     + '\n' +
@@ -26,18 +30,12 @@ setup(name='rebecca.menu',
       keywords='',
       author='',
       author_email='',
-      url='http://svn.plone.org/svn/collective/',
-      license='gpl',
+      url='https://github.com/rebeccaframework/rebecca.menu',
+      license='MIT',
       packages=find_packages('src'),
       package_dir = {'': 'src'},
       namespace_packages=['rebecca'],
       include_package_data=True,
       zip_safe=False,
-      install_requires=[
-          'setuptools',
-          # -*- Extra requirements: -*-
-      ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
+      install_requires=requires,
       )
