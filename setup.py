@@ -5,6 +5,13 @@ version = '0.0'
 
 requires = [
     "setuptools>=0.7",
+    "pyramid",
+]
+
+tests_require = [
+    "pytest",
+    "testfixtures",
+    "rebecca.testing",
 ]
 
 long_description = (
@@ -38,4 +45,8 @@ setup(name='rebecca.menu',
       include_package_data=True,
       zip_safe=False,
       install_requires=requires,
-      )
+      tests_require=tests_require,
+      extras_require={
+          "testing": tests_require,
+      },
+)
