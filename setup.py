@@ -11,7 +11,7 @@ requires = [
 tests_require = [
     "pytest",
     "testfixtures",
-    "rebecca.testing",
+    "webtest",
 ]
 
 long_description = (

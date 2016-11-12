@@ -1,7 +1,17 @@
 import pytest
 from testfixtures import compare, Comparison as C
 from pyramid import testing
-from rebecca.testing import config
+# from rebecca.testing import config
+
+
+@pytest.fixture
+def config(request):
+    config = testing.setUp()
+    def fin():
+        testing.tearDown()
+    request.addfinalizer(fin)
+    return config
+
 
 class TestRouteMenuFactory(object):
 
