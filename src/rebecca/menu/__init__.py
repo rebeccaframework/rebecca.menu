@@ -6,6 +6,7 @@ from .interfaces import IMenu, IMenuItem, IMenuFactory
 
 logger = logging.getLogger(__name__)
 
+
 def includeme(config):
     config.add_directive('add_route_menu', add_route_menu)
 
@@ -13,14 +14,19 @@ def includeme(config):
 def route_menu_config(menu_name):
     def dec(obj):
         def callback(scanner, name, obj):
-            add_route_menu(scanner.config, menu_name=menu_name,
-                           route_name=obj.route_name,
-                           display_name=obj.display_name,
-                           permission=(obj.permission
-                               if hasattr(obj, 'permission') else None))
+            add_route_menu(
+                scanner.config,
+                menu_name=menu_name,
+                route_name=obj.route_name,
+                display_name=obj.display_name,
+                permission=(obj.permission
+                            if hasattr(obj, 'permission') else None))
+
         venusian.attach(obj, callback=callback)
         return obj
+
     return dec
+
 
 def add_route_menu(config,
                    menu_name,
@@ -39,17 +45,20 @@ def add_route_menu(config,
         logger.debug("menu item {0}".format(intr))
 
     discriminator = "rebecca.menu:" + menu_name + ":" + route_name
-    intr = config.introspectable(title="Rebecca Menu",
-                                 category_name="rebecca.menu",
-                                 discriminator=discriminator,
-                                 type_name=None)
+    intr = config.introspectable(
+        title="Rebecca Menu",
+        category_name="rebecca.menu",
+        discriminator=discriminator,
+        type_name=None)
     intr['menu_name'] = menu_name
     intr['route_name'] = route_name
     intr['display_name'] = display_name
     intr['permission'] = permission
-    config.action(discriminator=discriminator,
-                  callable=register,
-                  introspectables=(intr,))
+    config.action(
+        discriminator=discriminator,
+        callable=register,
+        introspectables=(intr, ))
+
 
 def get_menu(request, menu_name=""):
     logger.debug("get menu")
@@ -60,6 +69,7 @@ def get_menu(request, menu_name=""):
     assert factory.items
     logger.debug(factory.items)
     return factory(request)
+
 
 @implementer(IMenuFactory)
 class RouteMenuFactory(object):
@@ -72,17 +82,17 @@ class RouteMenuFactory(object):
 
     def __call__(self, request):
 
-        return Menu(name=self.name,
-                    menu_items=[
-                        MenuItem(name=route_name,
-                                 url=request.route_url(route_name,
-                                                       **request.matchdict),
-                                 display_name=display_name)
-                        for route_name, display_name, permission
-                        in self.items
-                        if (permission is None
-                            or has_permission(permission,
-                                              request.context, request))])
+        return Menu(
+            name=self.name,
+            menu_items=[
+                MenuItem(
+                    name=route_name,
+                    url=request.route_url(route_name, **request.matchdict),
+                    display_name=display_name)
+                for route_name, display_name, permission in self.items
+                if (permission is None or has_permission(
+                    permission, request.context, request))
+            ])
 
 
 @implementer(IMenuItem)

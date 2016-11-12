@@ -9,6 +9,7 @@ class IMenuFactory(Interface):
         """ create menu
         """
 
+
 class IMenu(Interface):
     name = Attribute(u"")
     menu_items = Attribute(u"")
